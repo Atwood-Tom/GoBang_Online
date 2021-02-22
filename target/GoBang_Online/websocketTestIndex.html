@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试Websocket</title>
+</head>
+<body>
+     <!--先搞到一个输入框，使用输入框获取要发送的信息-->
+     <input type="text" id="input">
+     <button onclick="send()">发送</button>
+
+     <script>
+         //script 标签中放置的就是JavaScript代码
+
+         //初始化
+         //ws是webSocket的简写
+         //标准的URL。ws协议名，后面是IP和端口号 ，后面的webapp路径名
+         var webSocket=new WebSocket("ws://127.0.0.1:8080/GoBang_Online/webSocketTest/100");
+         //当将webSocket创建成功后，接下来需要实现一些方法
+         //建立连接成功时自动调用,创建好函数之后赋值给webSocket.onopen属性
+         webSocket.onopen=function () {
+             console.log("连接成功");
+         }
+         //连接断开时自动调用
+         webSocket.onclose=function () {
+             console.log("连接断开");
+         }
+         //连接异常时自动调用
+         webSocket.onerror=function () {
+             console.log("连接异常");
+         }
+         //收到信息时自动连接
+         webSocket.onmessage=function (event) {
+             console.log("收到信息"+event.data);
+         }
+
+         //当页面关闭的时候，自动断开websocket连接
+         window.onbeforeunload=function () {
+             webSocket.close();
+         }
+
+
+         //send()函数
+         function send() {
+             //把输入框中的内容通过webSocket发送到服务端
+             //1.先获取输入框内容
+             //通过标签中的id，来找到对应的标签
+             var input=document.getElementById("input");
+             //2.再去通过websocket发送
+             //input对象是一个输入框，value属性就是输入框的内容
+             console.log("发送数据")
+             webSocket.send(input.value);
+         }
+     </script>
+</body>
+</html>

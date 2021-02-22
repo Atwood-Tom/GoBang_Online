@@ -1,0 +1,11 @@
+game\GameAPI.class
+Test\testWebsocket$1.class
+game\RoomManager.class
+game\OnlineUserManager.class
+game\GameAPI$Request.class
+Test\testWebsocket.class
+game\Matcher$MatchResponse.class
+game\Matcher.class
+game\Room.class
+game\Room$PutChessResponse.class
+game\Matcher$1.class
